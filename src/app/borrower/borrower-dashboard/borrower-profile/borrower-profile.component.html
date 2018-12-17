@@ -1,0 +1,357 @@
+<p>
+    borrower-profile works!
+</p>
+<div *ngIf="showpersonalDtls">
+    <form #personalDtls="ngForm" (ngSubmit)="getPersonalDetails(personalDtls)" novalidate>
+        <div>
+            <label>First Name</label>
+            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || formSubmitted)" >
+                <div *ngIf="firstName?.errors?.required ">This field is required</div>
+                <div *ngIf="firstName?.errors?.pattern ">Please enter First Name</div>
+            </div>
+            <input type="text" #firstName="ngModel" ngModel required name="firstName"  id="firstName" minlength="5" placeholder="First Name" maxlength="60">
+        </div>
+
+        <div>
+            <label>Last Name</label>
+            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || formSubmitted)" >
+                <div *ngIf="lastName?.errors?.required ">This field is required</div>
+                <div *ngIf="lastName?.errors?.pattern ">Please enter Last Name</div>
+            </div>
+            <input type="text" #lastName="ngModel" ngModel required name="lastName"  id="lastName" minlength="3" placeholder="Last Name" maxlength="60">
+        </div>
+
+        <div>
+            <label>Pan Card</label>
+            <div *ngIf="panCard.invalid && (panCard.dirty || panCard.touched || formSubmitted)" >
+                <div *ngIf="panCard?.errors?.required ">This field is required</div>
+                <!-- <div *ngIf="panCard?.errors?.pattern ">Please enter a valid Pancard</div> -->
+            </div>
+            <input type="text" #panCard="ngModel" ngModel required name="panCard"  id="panCard" minlength="11" placeholder="Enter Pan Number" maxlength="11">
+        </div>
+
+        <div>
+            <label>Fathers Name</label>
+            <div *ngIf="fatherName.invalid && (fatherName.dirty || fatherName.touched || formSubmitted)" >
+                <div *ngIf="fatherName?.errors?.required">This field is required.</div>
+                <div *ngIf="fatherName?.errors?.minlength">Please enter a valid input</div>
+            </div>
+            <input type="text" #fatherName="ngModel" ngModel required name="fatherName"  id="fatherName" minlength="6" maxlength="32" placeholder="Enter Father Name">
+        </div>
+
+        <div>
+            <label>Date Of Birth</label>
+            <div *ngIf="dob.invalid && (dob.dirty || dob.touched || formSubmitted)" >
+                <div *ngIf="dob?.errors?.required ">This field is required</div>
+                <div *ngIf="dob?.errors?.pattern ">Please enter a valid input</div>
+            </div>
+            <!-- <input type="number" #dob="ngModel" ngModel required name="dob" class="form-control login-form" id="dob" placeholder="Select the Input"> -->
+            <ng-datepicker #dob="ngModel" required name="dob"  [(ngModel)]="date" id="dob"   [options]="datepickerOptions " id="dob" placeholder="Select the Input"></ng-datepicker>
+        </div>
+
+        <div>
+            <label>Marital Status</label>
+            <div *ngIf="maritalStatus.invalid && (maritalStatus.dirty || maritalStatus.touched || formSubmitted)" >
+                <div *ngIf="maritalStatus?.errors?.required ">This field is required</div>
+                <!-- <div *ngIf="maritalStatus?.errors?.pattern ">Please enter a input</div> -->
+            </div>
+            <!-- <input type="text" #maritalStatus="ngModel" ngModel required name="maritalStatus" class="form-control login-form" id="maritalStatus" placeholder="Select the Input"> -->
+            <p-dropdown #maritalStatus="ngModel" [options]="maritalStatusCategories" placeholder="Select the Input" required name="maritalStatus" [(ngModel)]="maritalStatus1" id="maritalStatus" ></p-dropdown>
+        </div>
+
+        <div>
+            <label>Reason For Loan</label>
+            <div *ngIf="loanReason.invalid && (loanReason.dirty || loanReason.touched || formSubmitted)" >
+                <div *ngIf="loanReason?.errors?.required ">This field is required</div>
+                <!-- <div *ngIf="loanReason?.errors?.pattern ">Please enter a valid input</div> -->
+            </div>
+            <!-- <input type="text" #loanReason="ngModel" ngModel required name="loanReason" class="form-control login-form" id="loanReason" placeholder="Select the Input"> -->
+            <p-dropdown #loanReason="ngModel" [options]="loanReasonCategories" placeholder="Select the Input" required name="loanReason" [(ngModel)]="loanReason1" id="loanReason" ></p-dropdown>
+        </div>
+
+        <div>
+            <label>Education</label>
+            <div *ngIf="education.invalid && (education.dirty || education.touched || formSubmitted)" >
+                <div *ngIf="education?.errors?.required ">This field is required</div>
+                <!-- <div *ngIf="education?.errors?.pattern ">Please enter a valid input</div> -->
+            </div>
+            <!-- <input type="text" #education="ngModel" ngModel required name="education" class="form-control login-form" id="education" placeholder="Select the Input"> -->
+            <p-dropdown #education="ngModel" [options]="educationCategories" placeholder="Select the Input" required name="education" [(ngModel)]="education1" id="education" ></p-dropdown>
+        </div>
+
+        <div>
+            <label>Gender</label>
+            <div *ngIf="gender.invalid && (gender.dirty || gender.touched || formSubmitted)" >
+                <div *ngIf="gender?.errors?.required ">This field is required</div>
+                <!-- <div *ngIf="gender?.errors?.pattern ">Please enter a valid input</div> -->
+            </div>
+            <!-- <input type="text" #gender="ngModel" ngModel required name="gender" class="form-control login-form" id="gender" placeholder="Select the Input"> -->
+            <p-dropdown #gender="ngModel" [options]="genderCategories" placeholder="Select the Input" required name="gender" [(ngModel)]="gender1" id="gender" ></p-dropdown>
+        </div>
+
+        <div>
+            <label>Mobile Number</label>
+            <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched || formSubmitted)" >
+                <div *ngIf="mobile?.errors?.required ">This field is required</div>
+                <div *ngIf="mobile?.errors?.minlength ">Please enter a valid mobile number</div>
+                <div *ngIf="mobile?.errors?.maxlength ">Please enter a valid mobile number</div>
+                <div *ngIf="mobile?.errors?.pattern ">Please enter a valid mobile number</div>
+            </div>
+            <input type="number" #mobile="ngModel" ngModel required name="mobile"  id="mobile" minlength="10" pattern="[0-9]*" placeholder="Mobile" maxlength="10">
+        </div>
+      
+            <label>Current Address</label>
+            <br>
+            <div>
+                <label>Residence Type Name</label>
+                <div *ngIf="residenceType.invalid && (residenceType.dirty || residenceType.touched || formSubmitted)" >
+                    <div *ngIf="residenceType?.errors?.required ">This field is required</div>
+                    <div *ngIf="residenceType?.errors?.pattern ">Please enter a valid input</div>
+                </div>
+                <!-- <input type="text" #residenceType="ngModel" ngModel required name="residenceType" class="form-control login-form" id="residenceType" placeholder="Select the Input"> -->
+                <p-dropdown #residenceType="ngModel" [options]="residenceCategories" placeholder="Select the Input" required name="residenceType" [(ngModel)]="residenceType1" id="residenceType" ></p-dropdown>
+            </div>
+
+            <div>
+            <label>Street Name</label>
+            <div *ngIf="curStreet.invalid && (curStreet.dirty || curStreet.touched || formSubmitted)" >
+                <div *ngIf="curStreet?.errors?.required ">This field is required</div>
+                <div *ngIf="curStreet?.errors?.pattern ">Please enter a valid input</div>
+            </div>
+            <input type="text" #curStreet="ngModel" ngModel required name="curStreet"  id="curStreet" placeholder="Enter Street Name">
+        </div>
+
+        <div>
+            <label>Pin Code</label>
+            <div *ngIf="curPincode.invalid && (curPincode.dirty || curPincode.touched || formSubmitted)" >
+                <div *ngIf="curPincode?.errors?.required ">This field is required</div>
+                <div *ngIf="curPincode?.errors?.pattern ">Please enter a valid input</div>
+            </div>
+            <input type="text" inputfocus  #curPincode="ngModel" [(ngModel)]="pincode" required name="curPincode"  id="curPincode" placeholder="Enter the Pincode"
+            minlength="6" maxlength="6" pattern="[0-9]*" (keypress)="getPincode($event)">
+        </div>
+
+          <div>
+            <label>City</label>
+            <div *ngIf="curCity.invalid && (curCity.dirty || curCity.touched || formSubmitted)" >
+                <div *ngIf="curCity?.errors?.required ">This field is required</div>
+                <div *ngIf="curCity?.errors?.pattern ">Please enter a valid input</div>
+            </div>
+            <input type="text" #curCity="ngModel" ngModel required name="curCity"  id="curCity" placeholder="Select the Input">
+        </div>
+
+        <div>
+            <label>State</label>
+            <div *ngIf="curState.invalid && (curState.dirty || curState.touched || formSubmitted)" >
+                <div *ngIf="curState?.errors?.required ">This field is required</div>
+                <div *ngIf="curState?.errors?.pattern ">Please enter a valid input</div>
+            </div>
+            <input type="text" #curState="ngModel" ngModel required name="curState"  id="curState" placeholder="Select the Input">
+        </div>
+
+        <div> My current address is as permanent address
+            <div>
+                <input type="checkbox" #sameAddress="ngModel" ngModel required name="sameAddress"  id="sameAddress" placeholder="Select the Input">
+            </div>
+            <div>
+                <input type="checkbox" #differentAddress="ngModel" ngModel required name="differentAddress"  id="differentAddress" placeholder="Select the Input">
+            </div>
+        </div>
+
+        <div>
+            <label>Permanent Address</label>
+            <br>
+            <label>Street Name</label>
+            <div *ngIf="perStreet.invalid && (perStreet.dirty || perStreet.touched || formSubmitted)" >
+                <div *ngIf="perStreet?.errors?.required ">This field is required</div>
+                <div *ngIf="perStreet?.errors?.pattern ">Please enter a valid input</div>
+            </div>
+            <input type="text" #perStreet="ngModel" ngModel required name="perStreet"  id="perStreet" placeholder="Enter Street Name">
+        </div>
+
+        <div>
+            <label>State</label>
+            <div *ngIf="perState.invalid && (perState.dirty || perState.touched || formSubmitted)" >
+                <div *ngIf="perState?.errors?.required ">This field is required</div>
+                <div *ngIf="perState?.errors?.pattern ">Please enter a valid input</div>
+            </div>
+            <input type="text" #perState="ngModel" ngModel required name="perState"  id="perState" placeholder="Select the Input">
+        </div>
+
+        <div>
+            <label>City</label>
+            <div *ngIf="perCity.invalid && (perCity.dirty || perCity.touched || formSubmitted)" >
+                <div *ngIf="perCity?.errors?.required ">This field is required</div>
+                <div *ngIf="perCity?.errors?.pattern ">Please enter a valid input</div>
+            </div>
+            <input type="text" #perCity="ngModel" ngModel required name="perCity"  id="perCity" placeholder="Select the Input">
+        </div>
+
+        <div>
+            <label>Pin Code</label>
+            <div *ngIf="perPincode.invalid && (perPincode.dirty || perPincode.touched || formSubmitted)" >
+                <div *ngIf="perPincode?.errors?.required ">This field is required</div>
+                <div *ngIf="perPincode?.errors?.pattern ">Please enter a valid input</div>
+            </div>
+            <input type="text" #perPincode="ngModel" ngModel required name="curPincode"  id="perPincode" placeholder="Select the Input">
+        </div>
+        <button type="submit" [ngClass]="{active:(personalDtls?.touched && personalDtls?.valid) ,deActive: (personalDtls?.touched && personalDtls?.invalid) , disable:(personalDtls?.untouched && personalDtls?.invalid)}" class="btn btn-primary proceed ">Proceed</button>
+        <div [ngStyle]="{'color': 'red', 'font-size': '12px', 'font-weight': 'normal', 'margin-top':'5px'}"></div>
+
+    </form>
+</div>
+
+<div *ngIf="showprofessionalDtls">
+    <div>
+        Additional Info
+    </div>
+    <br>
+    <form #professionalDtls="ngForm" (ngSubmit)="getProfessionalDetails(professionalDtls)" novalidate>
+        <div>
+            <label>Company Name</label>
+            <div *ngIf="companyName.invalid && (companyName.dirty || companyName.touched || formSubmitted)" >
+                <div *ngIf="companyName?.errors?.required ">This field is required</div>
+                <div *ngIf="companyName?.errors?.pattern ">Please enter Company Name</div>
+            </div>
+            <input type="text" #companyName="ngModel" ngModel required name="companyName"  id="companyName" minlength="5" placeholder="Company Name" maxlength="60">
+        </div>
+
+        <div>
+            <label>Company Type </label>
+            <div *ngIf="companyType.invalid && (companyType.dirty || companyType.touched || formSubmitted)" >
+                <div *ngIf="companyType?.errors?.required ">This field is required</div>
+                <div *ngIf="companyType?.errors?.pattern ">Please select valid input</div>
+            </div>
+            <!-- <input type="text" #companyType="ngModel" ngModel required name="companyType" class="form-control login-form" id="companyType" minlength="3" placeholder="Company Type" maxlength="60"> -->
+            <p-dropdown #companyType="ngModel" [options]="companyCategories" placeholder="Select the Input" required name="companyType" [(ngModel)]="companyType1" id="companyType" ></p-dropdown>
+        </div>
+
+        <div>
+            <label>Designation</label>
+            <div *ngIf="designation.invalid && (designation.dirty || designation.touched || formSubmitted)" >
+                <div *ngIf="designation?.errors?.required ">This field is required</div>
+                <div *ngIf="designation?.errors?.pattern ">Please enter Company Name</div>
+            </div>
+            <!-- <input type="text" #designation="ngModel" ngModel required name="designation" class="form-control login-form" id="designation" minlength="5" placeholder="Designation" maxlength="60"> -->
+            <p-dropdown #designation="ngModel" [options]="designationCategories" placeholder="Select the Input" required name="designation" [(ngModel)]="designation1" id="designation" ></p-dropdown>
+        </div>
+
+        <div>
+            <label>Total Years of Experience</label>
+            <div *ngIf="yearOfExp.invalid && (yearOfExp.dirty || yearOfExp.touched || formSubmitted)" >
+                <div *ngIf="yearOfExp?.errors?.required ">This field is required</div>
+                <div *ngIf="yearOfExp?.errors?.pattern ">Please enter years of experience</div>
+            </div>
+            <!-- <input type="text" #yearOfExp="ngModel" ngModel required name="yearOfExp" class="form-control login-form" id="yearOfExp" minlength="5" placeholder="Years of Experience" maxlength="60"> -->
+            <p-dropdown #yearOfExp="ngModel" [options]="yearOfExpCategories" placeholder="Select the Input" required name="yearOfExp" [(ngModel)]="yearOfExp1" id="yearOfExp" ></p-dropdown>
+        </div>
+
+        <div>
+            <label>Office Address</label>
+            <br>
+            <label>Street Name</label>
+            <div *ngIf="officeStreetName.invalid && (officeStreetName.dirty || officeStreetName.touched || formSubmitted)" >
+                <div *ngIf="officeStreetName?.errors?.required ">This field is required</div>
+                <div *ngIf="officeStreetName?.errors?.pattern ">Please enter street name</div>
+            </div>
+            <input type="text" #officeStreetName="ngModel" ngModel required name="officeStreetName"  id="officeStreetName" minlength="3" placeholder="Street Address" maxlength="60">
+        </div>
+
+        <div>
+            <label>Pin Code</label>
+            <div *ngIf="officePincode.invalid && (officePincode.dirty || officePincode.touched || formSubmitted)" >
+                <div *ngIf="officePincode?.errors?.required ">This field is required</div>
+                <div *ngIf="officePincode?.errors?.pattern ">Please enter street name</div>
+            </div>
+            <input type="text" #officePincode="ngModel" ngModel required name="officePincode"  id="officePincode" minlength="3" placeholder="Pin Code" maxlength="60">
+        </div>
+
+        <div>
+            <label>State</label>
+            <div *ngIf="officeState.invalid && (officeState.dirty || officeState.touched || formSubmitted)" >
+                <div *ngIf="officeState?.errors?.required ">This field is required</div>
+                <div *ngIf="officeState?.errors?.pattern ">Please enter street name</div>
+            </div>
+            <input type="text" #officeState="ngModel" ngModel required name="officeState"  id="officeState" minlength="3" placeholder="State" maxlength="60">
+        </div>
+
+        <div>
+            <label>City</label>
+            <div *ngIf="officeCity.invalid && (officeCity.dirty || officeCity.touched || formSubmitted)" >
+                <div *ngIf="officeCity?.errors?.required ">This field is required</div>
+                <div *ngIf="officeCity?.errors?.pattern ">Please enter street name</div>
+            </div>
+            <input type="text" #officeCity="ngModel" ngModel required name="officeCity"  id="officeCity" minlength="3" placeholder="City" maxlength="60">
+        </div>
+        <button type="submit" [ngClass]="{active:(professionalDtls?.touched && professionalDtls?.valid) ,deActive: (professionalDtls?.touched && professionalDtls?.invalid) , disable:(professionalDtls?.untouched && professionalDtls?.invalid)}" class="btn btn-primary proceed ">Continue</button>
+        <div [ngStyle]="{'color': 'red', 'font-size': '12px', 'font-weight': 'normal', 'margin-top':'5px'}"></div>
+
+    </form>
+</div>
+
+
+<div *ngIf="showUploadDocuments">
+    <div>
+       KYC Documents
+    </div>
+    <br>
+    <form #uploadDocumetDtls="ngForm" (ngSubmit)="getUploadDocumentsDetails(uploadDocumetDtls)" novalidate>
+        <div>
+            <label>UPLOAD PAN CARD</label>
+            <div *ngIf="companyName.invalid && (companyName.dirty || companyName.touched || formSubmitted)" >
+                <div *ngIf="companyName?.errors?.required ">This field is required</div>
+                <div *ngIf="companyName?.errors?.pattern ">Please enter Company Name</div>
+            </div>
+            <input type="text" #companyName="ngModel" ngModel required name="companyName"  id="companyName" minlength="5" placeholder="Company Name" maxlength="60">
+        </div>
+
+        <div>
+            <label>UPLOAD CURRENT ADDRESS PROOF </label>
+            <div *ngIf="companyType.invalid && (companyType.dirty || companyType.touched || formSubmitted)" >
+                <div *ngIf="companyType?.errors?.required ">This field is required</div>
+                <div *ngIf="companyType?.errors?.pattern ">Please select valid input</div>
+            </div>
+            <input type="text" #companyType="ngModel" ngModel required name="companyType"  id="companyType" minlength="3" placeholder="Company Type" maxlength="60">
+        </div>
+
+        <div>
+            <label>UPLOAD LAST 3 MONTHS PAYSLIPS</label>
+            <div *ngIf="companyName.invalid && (companyName.dirty || companyName.touched || formSubmitted)" >
+                <div *ngIf="companyName?.errors?.required ">This field is required</div>
+                <div *ngIf="companyName?.errors?.pattern ">Please enter Company Name</div>
+            </div>
+            <input type="text" #companyName="ngModel" ngModel required name="companyName"  id="companyName" minlength="5" placeholder="Company Name" maxlength="60">
+            <div *ngIf="companyType.invalid && (companyType.dirty || companyType.touched || formSubmitted)" >
+                <div *ngIf="companyType?.errors?.required ">This field is required</div>
+                <div *ngIf="companyType?.errors?.pattern ">Please select valid input</div>
+            </div>
+            <input type="text" #companyType="ngModel" ngModel required name="companyType"  id="companyType" minlength="3" placeholder="Company Type" maxlength="60">
+            <div *ngIf="companyType.invalid && (companyType.dirty || companyType.touched || formSubmitted)" >
+                <div *ngIf="companyType?.errors?.required ">This field is required</div>
+                <div *ngIf="companyType?.errors?.pattern ">Please select valid input</div>
+            </div>
+            <input type="text" #companyType="ngModel" ngModel required name="companyType"  id="companyType" minlength="3" placeholder="Company Type" maxlength="60">
+   
+          </div>
+
+        <div>
+            <label>UPLOAD BANK STATEMENT </label>
+            <div *ngIf="companyType.invalid && (companyType.dirty || companyType.touched || formSubmitted)" >
+                <div *ngIf="companyType?.errors?.required ">This field is required</div>
+                <div *ngIf="companyType?.errors?.pattern ">Please select valid input</div>
+            </div>
+            <input type="text" #companyType="ngModel" ngModel required name="companyType"  id="companyType" minlength="3" placeholder="Company Type" maxlength="60">
+        </div>
+
+        <button type="submit" [ngClass]="{active:(uploadDocumetDtls?.touched && uploadDocumetDtls?.valid) ,deActive: (uploadDocumetDtls?.touched && uploadDocumetDtls?.invalid) , disable:(uploadDocumetDtls?.untouched && uploadDocumetDtls?.invalid)}" class="btn btn-primary proceed ">Continue</button>
+        <div [ngStyle]="{'color': 'red', 'font-size': '12px', 'font-weight': 'normal', 'margin-top':'5px'}"></div>
+
+    </form>
+</div>
+
+<div *ngIf="showProfileCompletionMessage">
+  <div>
+    <span>CONGRATULATIONS!!!</span><br>
+    <span> Your details are with us, safe & secure. We will notify you shortly.</span>
+  </div>
+</div>

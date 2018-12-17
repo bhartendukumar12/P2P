@@ -1,0 +1,64 @@
+<div>
+    <app-header></app-header>
+  </div>
+  <form #myForm="ngForm" (ngSubmit)="signUp(myForm)" novalidate >
+      <div >
+          <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched )" class="error-msg validationTooltip">
+            <div *ngIf="firstName?.errors?.required ">This field is required</div>
+            <div *ngIf="firstName?.errors?.pattern ">Please enter Name</div>
+          </div>
+          <input type="text" #firstName="ngModel"  ngModel required name="firstName" class="form-control login-form" id="firstName" minlength="5"
+          placeholder="First Name" maxlength="60">
+          </div>
+
+          <div >
+              <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched )" class="error-msg validationTooltip">
+                <div *ngIf="lastName?.errors?.required ">This field is required</div>
+                <div *ngIf="lastName?.errors?.pattern ">Please enter Name</div>
+              </div>
+              <input type="text" #lastName="ngModel"  ngModel required name="lastName" class="form-control login-form" id="lastName" minlength="5"
+              placeholder="Last Name" maxlength="60">
+              </div>
+    <div >
+      <div *ngIf="email1.invalid && (email1.dirty || email1.touched )" class="error-msg validationTooltip">
+        <div *ngIf="email1?.errors?.required ">This field is required</div>
+        <div *ngIf="email1?.errors?.pattern ">Please enter a valid E-mail ID</div>
+      </div>
+      <input type="email" #email1="ngModel"  ngModel required name="email" class="form-control login-form" id="email1" minlength="5"
+      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Email" maxlength="60">
+      </div>
+    <div >
+      <div *ngIf="password.invalid && (password.dirty || password.touched )" class="error-msg validationTooltip">
+        <div *ngIf="password?.errors?.required">This field is required.</div>
+        <div *ngIf="password?.errors?.minlength">Please enter a valid Password</div>
+      </div>
+       <input  type="password" #password="ngModel" ngModel required name="password" class="form-control login-form" id="pwd"
+       minlength="6" maxlength="32" placeholder="Password"   >  
+      </div>
+
+      <div >
+          <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="error-msg validationTooltip">
+            <div *ngIf="mobile?.errors?.required ">This field is required</div>
+            <div *ngIf="mobile?.errors?.pattern ">Please enter a valid mobile number</div>
+          </div>
+          <input type="number" #mobile="ngModel"  ngModel required name="mobile" class="form-control login-form" id="mobile" minlength="10"
+          pattern="[0-9]*" placeholder="Mobile" maxlength="10">
+          </div>  
+
+          <div >
+              <div *ngIf="otp.invalid && (otp.dirty || otp.touched )" class="error-msg validationTooltip">
+                <div *ngIf="otp?.errors?.required ">This field is required</div>
+                <div *ngIf="otp?.errors?.pattern ">Please enter a valid otp</div>
+              </div>
+              <input type="number" #otp="ngModel"  ngModel required name="otp" class="form-control login-form" id="otp" minlength="6"
+              pattern="[0-9]*" placeholder="OTP" maxlength="6">
+              </div>  
+
+      <button type="submit" [ngClass]="{active:(myForm?.touched && myForm?.valid) ,deActive: (myForm?.touched && myForm?.invalid) , disable:(myForm?.untouched && myForm?.invalid)}" class="btn btn-primary proceed " >Submit</button>
+      <div [ngStyle]="{'color': 'red', 'font-size': '12px', 'font-weight': 'normal', 'margin-top':'5px'}"></div>
+    
+      </form>
+
+<div>
+    <app-footer></app-footer>
+  </div>

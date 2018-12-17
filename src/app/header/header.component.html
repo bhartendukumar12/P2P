@@ -1,0 +1,12 @@
+<p>
+  header works!
+</p>
+<div (click)="signIn()" >Sign In</div>
+
+
+<div *ngIf="signInPopup">
+  Sign In Popup
+  <br>
+  <button (click)="closeSignInPopup()">close</button>
+</div>
+

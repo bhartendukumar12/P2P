@@ -1,0 +1,14 @@
+<div>
+  <app-header></app-header>
+</div>
+<p>
+  home-page works!
+</p>
+<div (click)="openSignUpPopup()">Sign Up</div>
+<div *ngIf="signUpPopup">
+  SignUp Popup<br>
+  <button (click)="gotoRegistration()">continue</button>
+</div>
+<div>
+  <app-footer></app-footer>
+</div>
