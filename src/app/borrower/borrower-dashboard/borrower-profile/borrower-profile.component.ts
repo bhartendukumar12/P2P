@@ -13,12 +13,9 @@ import { Commonservice } from '../../../services/Commonservice.service';
   templateUrl: './borrower-profile.component.html',
   styleUrls: ['./borrower-profile.component.scss']
 })
-
 export class BorrowerProfileComponent implements OnInit {
   @ViewChild('personalDtls')
-
   private personalDtls: NgForm;
-  
   @ViewChild('professionalDtls')
   private professionalDtls: NgForm;
   @ViewChild('uploadDocumetDtls')
